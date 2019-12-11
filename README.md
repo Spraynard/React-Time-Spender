@@ -1,44 +1,27 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Overview
+The intention of this application is to capture the time spending on specific activities.
 
-## Available Scripts
+# Requirements
 
-In the project directory, you can run:
+**UI:**
+- Clock in/clock out panel. This panel can work in 2 modes:
 
-### `yarn start`
+    - Start an activity. User can enter a description of an activity and click on a start button. This action will add a new record in the activity history.
+    - Stop an activity. User can see a description of the current activity and have a stop button. By click on this button, a record in the activity history will be updated with an end time.
+- Activity grid panel. This panel should show a grid with 4 columns: start time, end time, duration, description.
+If an activity is still in progress, end time should be empty and duration should reflect the current duration of this activity.
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+**Data storing:**
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+Store the list of activities in the browser session storage.
 
-### `yarn test`
+**Framework:**
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Use React with vanilla JS or TypeScript.
 
-### `yarn build`
+# Expectations
+Implement the above listed requirements in a manner you see fitting. Focus more on functional implementation than on look and feel.
+Demonstrate design and implementation aspects you feel are important in a software project.
 
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
+# Publish
+Publish your implementation under your own github account.
