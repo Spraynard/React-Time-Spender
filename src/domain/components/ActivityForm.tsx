@@ -1,5 +1,5 @@
 import React from "react";
-import "./css/ActivityForm.css";
+import "./styles/ActivityForm.css";
 
 type Props = {
     handleSubmit: (event : React.FormEvent<HTMLFormElement>) => void;

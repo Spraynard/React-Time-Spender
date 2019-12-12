@@ -2,7 +2,7 @@
  *
  */
 import React from "react"
-import { IActivity } from "./interfaces";
+import { IActivity } from "../interfaces";
 
 type Props = {
     selectedActivity: ( IActivity | null );

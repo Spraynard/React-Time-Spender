@@ -1,21 +1,39 @@
 import React from 'react';
-import logo from './logo.svg';
 import "./css/normalize.css";
 import './css/App.css';
-import ActivityDisplay from "./ActivityDisplay";
-import ActivityGrid from "./ActivityGrid";
-import { IActivity, IActivityDictionary } from './interfaces';
-import ActivityForm from './ActivityForm';
-import ActivityDisplayItem from './ActivityDisplayItem';
-import { IActivityFactory } from "./factories";
-import { getActivitiesInDisplayOrder } from "./helpers";
 
-const App: React.FC = () => {
+/** Domain */
+import { IActivityDictionary, IApplicationStorage } from './domain/interfaces';
+import { IActivityFactory } from "./domain/factories";
+import { getActivitiesInDisplayOrder } from "./domain/helpers";
+
+import ActivityGrid from "./domain/components/ActivityGrid";
+import ActivityForm from './domain/components/ActivityForm';
+import ActivityDisplayItem from './domain/components/ActivityDisplayItem';
+
+const App = () => {
 	const [ selectedActivity, setSelectedActivity ] = React.useState<string | null>(null);
 	const [ activitiesData, setActivitiesData ] = React.useState<IActivityDictionary>({});
 	const [ activities, setActivities ] = React.useState<string[]>([]);
-	const [ timers, setTimers ] = React.useState<object>({})
 	const [ activityFormDescription, setActivityFormDescription ] = React.useState<string>("");
+
+	// Grab any and all data that we can from session storage on initial load.
+	React.useEffect(() => {
+		if ( ! window.sessionStorage ) { return }
+
+		let storage_object = window.sessionStorage.getItem("time-spender-session-storage");
+
+		if ( ! storage_object ) { return; }
+
+		let { selectedActivity, activitiesData, activities, activityFormDescription }: IApplicationStorage = JSON.parse(storage_object);
+
+		setSelectedActivity(selectedActivity);
+		setActivitiesData(activitiesData);
+		setActivities(activities);
+		setActivityFormDescription(activityFormDescription);
+
+		// We should go through our activities data and reset any timers
+	}, [])
 
 	const handleActivityFormSubmit = (e: React.FormEvent<HTMLFormElement>) => {
 		e.preventDefault();

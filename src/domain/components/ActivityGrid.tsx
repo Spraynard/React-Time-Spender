@@ -2,9 +2,10 @@
  * Component used to display the activity history
  */
 import React from "react"
-import { IActivity } from "./interfaces";
+import { IActivity } from "../interfaces";
 import ActivityGridItem from "./ActivityGridItem";
-import "./css/ActivityGrid.css"
+import "./styles/ActivityGrid.css"
+
 type Props = {
     displayActivities : Array<IActivity>;
     setSelectedActivity : ( id : string ) => void;

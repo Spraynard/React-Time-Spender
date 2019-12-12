@@ -1,5 +1,5 @@
 import React from "react"
-import { getDateString } from "./helpers"
+import { getDateString } from "../helpers"
 type Props = {
     id: string;
     startDate: Date;

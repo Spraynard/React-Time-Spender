@@ -10,3 +10,10 @@ export interface IActivity {
 export interface IActivityDictionary {
     [ id : string ] : IActivity
 }
+
+export interface IApplicationStorage {
+    selectedActivity : (string | null);
+    activitiesData : IActivityDictionary;
+    activities : string[];
+    activityFormDescription : string;
+}
