@@ -1,0 +1,27 @@
+/* :root {
+	--breakpoint-width: 992px;
+} */
+
+html, body {
+	width: 100%;
+	max-width: 100%;
+}
+.app-flex-container {
+	display : flex;
+	flex-direction: column;
+}
+
+.app-container-item {
+	flex: 1 1 auto;
+	padding: 15px;
+}
+
+@media (min-width: 992px) {
+	.app-flex-container {
+		flex-direction: row;
+	}
+
+	.app-container-item {
+		flex: 0 0 50%;
+	}
+}
