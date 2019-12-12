@@ -1,0 +1,7 @@
+.activity-grid-container table {
+    width: 100%;
+}
+
+.activity-grid-item {
+    cursor: pointer;
+}
