@@ -1,5 +1,6 @@
 .activity-grid-container table {
     width: 100%;
+    text-align: left;
 }
 
 .activity-grid-item {

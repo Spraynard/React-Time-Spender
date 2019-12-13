@@ -2,3 +2,13 @@
     display: flex;
     flex-direction: column;
 }
+
+.activity-form-label-container {
+    margin-bottom: 15px;
+}
+
+.activity-form-error {
+    margin-left: 15px;
+    color: red;
+
+}

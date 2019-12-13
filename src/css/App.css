@@ -1,11 +1,32 @@
-/* :root {
+:root {
 	--breakpoint-width: 992px;
-} */
+	--color-beige: #F5F5DC;
+	--color-light-blue: #ADD8E6;
+}
 
 html, body {
 	width: 100%;
 	max-width: 100%;
+	background-color: var(--color-beige);
 }
+
+label {
+	font-weight: 600;
+}
+
+textarea {
+	margin-bottom: 15px;
+	min-height: 100px;
+	padding: 5px;
+}
+
+button, input[type="submit"] {
+	background-color: var(--color-light-blue);
+	padding: 5px;
+	border-color: black;
+	cursor: pointer;
+}
+
 .app-flex-container {
 	display : flex;
 	flex-direction: column;
