@@ -2,27 +2,61 @@
  * Returns a list of transformed objects from activities data.
  */
 import { IActivity, IActivityDictionary } from "./interfaces"
+import moment, { Duration } from "moment";
 
 export const getActivitiesInDisplayOrder = (activities: string[], activities_data: IActivityDictionary):IActivity[] =>
     activities.map( (activity_id : string) => activities_data[activity_id]);
 
-const isSameDay = ( date1: Date, date2: Date): boolean => ( date1.getDate() !== date2.getDate() ) && ( date1.getMonth() !== date2.getMonth() )
-
-export const getDateString = (activityDate : (Date | null), fallback = "-"):string => {
-    let today = new Date();
-    let datePrefix = "";
+export const outputDate = (activityDate : (Date | null), fallback = "-"):string => {
 
     if ( ! activityDate )
     {
         return fallback;
     }
 
-    if ( ! isSameDay( activityDate, today ) )
+    let today = moment();
+    let activityDay = moment(activityDate);
+    let dateFormat = "hh:mm:ss A";
+
+    // If we're not on the same day as when the activity was made
+    if ( ! activityDay.isSame(today, 'd') )
     {
-        let datePrefix = activityDate.toLocaleDateString("en-US");
+        dateFormat = `MMM/DD ${dateFormat}`
     }
 
-    let timeString = activityDate.toLocaleDateString("en-US", { hour : "numeric", minute : "numeric", second : "numeric" })
-
-    return ( datePrefix ) ? `${datePrefix} ${timeString}` : `${timeString}`;
+    return activityDay.format(dateFormat);
 }
+
+const hoursSuffix = "h"
+const minuteSuffix = "m"
+const secondsSuffix = "s"
+
+export const outputDuration = ( duration: Duration ):string => (duration.hours()) ?
+    `${duration.hours()}${hoursSuffix} ${duration.minutes()}${minuteSuffix} ${duration.seconds()}${secondsSuffix}`
+    :
+    (duration.minutes()) ?
+        `${duration.minutes()}${minuteSuffix} ${duration.seconds()}${secondsSuffix}`
+        :
+        `${duration.seconds()}${secondsSuffix}`
+
+// One second
+const DEFAULT_TICK_VALUE = 1000
+export const startActivityTimer = ( id : string, timerTickHandler: (id:string) => void ): number => window.setInterval(() => timerTickHandler(id), DEFAULT_TICK_VALUE);
+export const stopActivityTimer = ( timerID : (number | null) ) => {
+    if ( ! timerID )
+    {
+        return null
+    }
+
+    window.clearInterval(timerID)
+    return null
+}
+
+// Returns a copy of the activities dictionary
+export const setActivitiesDataValue = ( id : string, key : string, value : any, activities : IActivityDictionary ): IActivityDictionary => ({
+    ...activities,
+    [id] : {
+        ...activities[id],
+        [ key ] : value
+    }
+});
