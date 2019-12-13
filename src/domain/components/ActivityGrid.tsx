@@ -8,20 +8,29 @@ import "./styles/ActivityGrid.css"
 
 type Props = {
     displayActivities : Array<IActivity>;
+    headers : string[],
+    selectedActivity : (string | null);
     setSelectedActivity : ( id : string ) => void;
-    headers : string[]
+    timerStartHandler : ( id : string ) => void;
 }
 
-const ActivityGrid = ({ displayActivities, setSelectedActivity, headers } : Props) =>
+const ActivityGrid = ({ displayActivities, selectedActivity, setSelectedActivity, headers, timerStartHandler } : Props) =>
     <div className="activity-grid-container app-container-item">
         <table className="activity-grid-table">
             <thead className="activity-grid-table-header">
                 <tr>
-                    {headers.map( (header: string) => <th>{header}</th> )}
+                    {headers.map( (header: string, index: number) => <th key={`activity-header-${index + 1}`}>{header}</th> )}
                 </tr>
             </thead>
             <tbody className="activity-grid-table-body">
-                {displayActivities.map( (activity: IActivity) => <ActivityGridItem selectionHandler={setSelectedActivity} {...activity}/> )}
+                {displayActivities.map(
+                    (activity: IActivity) =>
+                        <ActivityGridItem
+                            key={`activity-grid-item-${activity.id}`}
+                            selectionHandler={setSelectedActivity}
+                            timerStartHandler={timerStartHandler}
+                            selectedActivity={selectedActivity}
+                            {...activity}/> )}
             </tbody>
         </table>
     </div>

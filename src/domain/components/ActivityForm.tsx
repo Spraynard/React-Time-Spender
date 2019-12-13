@@ -4,12 +4,16 @@ import "./styles/ActivityForm.css";
 type Props = {
     handleSubmit: (event : React.FormEvent<HTMLFormElement>) => void;
     activityFormDescription: string;
+    activityFormError: string;
     setActivityFormDescription: (description: string) => void;
 }
 
-const ActivityForm = ({ handleSubmit, activityFormDescription, setActivityFormDescription }: Props) =>
+const ActivityForm = ({ handleSubmit, activityFormError, activityFormDescription, setActivityFormDescription }: Props) =>
     <form onSubmit={handleSubmit} className="activity-form">
-        <label htmlFor="activity-description">Description</label>
+        <div className="activity-form-label-container">
+            <label htmlFor="activity-description" className="activity-form-header">Description</label>
+            <span className="activity-form-error">{ activityFormError ? activityFormError : ""}</span>
+        </div>
         <textarea
             id="activity-description"
             className="activity-description"
