@@ -4,6 +4,7 @@
 import React from "react"
 import { IActivity } from "../interfaces";
 import { outputDuration, outputDate } from "../helpers";
+import "./styles/ActivityDisplay.css";
 
 type Props = {
     selectedActivity: ( IActivity | null );
@@ -12,8 +13,8 @@ type Props = {
     activityRemoveHandler: ( id : string ) => void;
 }
 
-const ActivityDisplayItem = ( { selectedActivity, timerResumeHandler, activityRemoveHandler, timerStopHandler }: Props) => ( selectedActivity ) ?
-        <div>
+const ActivityDisplay = ( { selectedActivity, timerResumeHandler, activityRemoveHandler, timerStopHandler }: Props) => ( selectedActivity ) ?
+        <div className="activity-display">
             <h1>Selected Activity</h1>
             <h4>Duration: {outputDuration(selectedActivity.duration)}</h4>
             <h4>Start: {outputDate(selectedActivity.startDate)}</h4>
@@ -28,4 +29,4 @@ const ActivityDisplayItem = ( { selectedActivity, timerResumeHandler, activityRe
         :
         <h4>Please fill out an activity</h4>;
 
-export default ActivityDisplayItem;
+export default ActivityDisplay;
