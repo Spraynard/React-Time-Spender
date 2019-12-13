@@ -6,7 +6,7 @@ import { Duration } from 'moment';
 /** Domain */
 import { IActivityDictionary, IActivity } from './domain/interfaces';
 import { IActivityFactory } from "./domain/factories";
-import { getActivitiesInDisplayOrder, startActivityTimer, setActivitiesDataValue, stopActivityTimer } from "./domain/helpers";
+import { getActivitiesInDisplayOrder, startActivityTimer, setActivitiesDataValue, stopActivityTimer, stopAllActivityTimersAndReturnState } from "./domain/helpers";
 import { useStateFromSessionStorage } from "./domain/hooks";
 import { serializeActivityData, serializeActivities, serializeString } from "./domain/serializers";
 import { unserializeActivityData, unserializeActivities, unserializeString} from "./domain/unserializers";
@@ -35,15 +35,7 @@ const App = () => {
 		}
 
 		let newActivity: IActivity = IActivityFactory(activityFormDescription);
-		let newActivitiesData: IActivityDictionary = Object.keys(activitiesData).reduce(
-			(prev, current) => ({
-				...prev,
-				[current] : {
-					...activitiesData[current],
-					endDate : (!activitiesData[current].endDate) ? new Date() : activitiesData[current].endDate,
-					timerID: (activitiesData[current].timerID) ? stopActivityTimer(activitiesData[current].timerID) : null
-				}
-			}),{});
+		let newActivitiesData: IActivityDictionary = stopAllActivityTimersAndReturnState(activitiesData);
 
 		setSelectedActivity(newActivity.id);
 		setActivities([ ...activities, newActivity.id ])
@@ -80,10 +72,11 @@ const App = () => {
 	 */
 	const timerResumeHandler = ( id : string ): void => {
 		let new_activity = IActivityFactory(activitiesData[id].description);
+		let activitiesDataNoTimers = stopAllActivityTimersAndReturnState(activitiesData);
 
 		setSelectedActivity(new_activity.id);
 		setActivities([...activities, new_activity.id])
-		setActivitiesData({ ...activitiesData, [new_activity.id]: new_activity })
+		setActivitiesData({ ...activitiesDataNoTimers, [new_activity.id]: new_activity })
 	}
 
 	const timerStopHandler = ( id : string ): void => {

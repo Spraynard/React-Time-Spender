@@ -60,3 +60,20 @@ export const setActivitiesDataValue = ( id : string, key : string, value : any, 
         [ key ] : value
     }
 });
+
+/**
+ * Given activity data, returns an activity data object with any active timer stopped.
+ * Will supply an end date, and a null timerID.
+ *
+ * @param activitiesData An object structured as an IActivityDictionary
+ */
+export const stopAllActivityTimersAndReturnState =
+    (activitiesData: IActivityDictionary): IActivityDictionary => Object.keys(activitiesData).reduce(
+        (prev, current) => ({
+            ...prev,
+            [current]: {
+                ...activitiesData[current],
+                endDate: (!activitiesData[current].endDate) ? new Date() : activitiesData[current].endDate,
+                timerID: (activitiesData[current].timerID) ? stopActivityTimer(activitiesData[current].timerID) : null
+            }
+        }), {});

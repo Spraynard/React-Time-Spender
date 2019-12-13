@@ -27,6 +27,6 @@ const ActivityDisplay = ( { selectedActivity, timerResumeHandler, activityRemove
             <button onMouseDown={() => activityRemoveHandler(selectedActivity.id)}>Remove Activity</button>
         </div>
         :
-        <h4>Please fill out an activity</h4>;
+        <h4 className="activity-display">Please fill out an activity</h4>;
 
 export default ActivityDisplay;
