@@ -1,8 +1,5 @@
 .activity-grid-container table {
+    border-spacing: 0px;
     width: 100%;
     text-align: left;
-}
-
-.activity-grid-item {
-    cursor: pointer;
 }

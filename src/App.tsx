@@ -12,7 +12,7 @@ import { serializeActivityData, serializeActivities, serializeString } from "./d
 import { unserializeActivityData, unserializeActivities, unserializeString} from "./domain/unserializers";
 import ActivityGrid from "./domain/components/ActivityGrid";
 import ActivityForm from './domain/components/ActivityForm';
-import ActivityDisplayItem from './domain/components/ActivityDisplayItem';
+import ActivityDisplay from './domain/components/ActivityDisplay';
 
 const App = () => {
 	const [ selectedActivity, setSelectedActivity ] = useStateFromSessionStorage(null, 'selected-activity', unserializeString, serializeString);
@@ -116,7 +116,7 @@ const App = () => {
 						setActivityFormDescription={setActivityFormDescription}
 						activityFormError={activityFormError}
 					/>
-					<ActivityDisplayItem
+					<ActivityDisplay
 						selectedActivity={(selectedActivity) ?  activitiesData[selectedActivity] : null}
 						timerStopHandler={timerStopHandler}
 						timerResumeHandler={timerResumeHandler}

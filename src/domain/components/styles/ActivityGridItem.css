@@ -1,0 +1,12 @@
+.activity-grid-item {
+    cursor: pointer;
+}
+
+.activity-grid-item.selected {
+    background: var(--color-uranian-blue);
+    font-weight: 600;
+}
+
+.activity-grid-item:hover:not(.selected) {
+    background: var(--color-light-blue);
+}

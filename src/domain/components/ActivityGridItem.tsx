@@ -1,6 +1,8 @@
 import React from "react"
 import { outputDate, outputDuration, stopActivityTimer } from "../helpers"
 import { Duration } from "moment"
+import "./styles/ActivityGridItem.css";
+
 type Props = {
     id: string;
     startDate: Date;
@@ -18,6 +20,8 @@ const ActivityGridItem = ({ id, startDate, endDate, duration, description, timer
     // On componentDidMount and componentDidUnmount,
     // apply a timer and remove a timer respectively
     React.useEffect(() => {
+
+        // Protects against starting timers when we load from Storage
         if ( !endDate )
         {
             timerStartHandler(id);
